@@ -3,8 +3,8 @@ import string
 import os
 
 chars = string.printable
-website = ""
-password = ""
+website = [""]
+password = [""]
 
 def createPass():
     global website
