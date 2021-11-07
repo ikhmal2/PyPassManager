@@ -3,20 +3,23 @@ import string
 import os
 
 chars = string.printable
-website = [""]
-password = [""]
+website = []
+password = []
 
 def createPass():
     global website
     global password
 
     while True:
-        website = input("What is the name of the web app?: ")
+        website.append(input("What is the name of the web app?: "))
         password_len = int(input("How many characters do you want in your password?: "))
-        password = ""
+        create_password = ""
+
         for x in range(0,password_len):
             password_char = random.choice(chars)
-            password = password + password_char
+            create_password = (create_password + password_char)
+         
+        password.append(create_password)
         
         answer = input("Do you want to add more passwords? :")
         answer = answer.lower()
@@ -28,8 +31,11 @@ def createPass():
 def output():
     print("Your creditantials are as follows: ")
     print("----------------------------------")
-    print("Website:",website)
-    print("Password:",password)
+
+    for w in website:
+        for p in password:
+            print("Website:",w)
+            print("Password:",p)
 
 def checkFileExist():
     if os.path.exists("passwords.txt"):
@@ -39,9 +45,12 @@ def checkFileExist():
         file.close
 
 def appendNew(website,password):
-    with open("passwords.txt","a") as file:
-        file.write("Website: " + website)
-        file.write(" Password: " + password + "\n")
+
+    for w in website:
+        for p in password: 
+            with open("passwords.txt","a") as file:
+                file.write("Website: " + w)
+                file.write(" Password: " + p + "\n")
 
 createPass()
 checkFileExist()
